@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
-```
+```ruby
 require 'gnip-powertrack'
 
 headers = {
@@ -34,8 +34,30 @@ stream = Gnip::Powertrack::Stream::Connector.new GNIP_API_STREAM_URL, headers
 stream.start
 ```
 
+Each message is a JSON string. When received, the `Gnip::Powertrack::Stream.process_chunk` method calls `Gnip::Powertrack.process(message)`. You will need to define `Gnip::Powertrack.process(message)`.
+
+Example:
+
+```ruby
+module Gnip
+  module Powertrack
+    def self.process(message)
+      # enqueue message to some worker or other asynchronous process
+    end
+  end
+end
+```
+
+We want to keep the Powertrack connector as fast and as light-weight as possible. Is should not be processing anything. No JSON decoding. It should pass the message off ASAP.
+
 ## Development
 
+Yes.
+
+## Todo
+
+1. Tests
+2. Remove extra classes and methods
 
 ## Contributing
 

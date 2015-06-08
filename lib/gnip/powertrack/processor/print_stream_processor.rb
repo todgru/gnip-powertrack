@@ -20,7 +20,7 @@ module Gnip
           @stream.start
           run_thread = Thread.new do
             while not stopped
-              #p "fuck ya #{stream.pop}"
+              #p "test #{stream.pop}"
             end
           end
         end

@@ -81,12 +81,10 @@ module Gnip
           reset_reconnect_time if connect_stream
         end
 
-        def process_chunk(chunk)
-          #puts "this is the chunk we got: #{chunk}" unless chunk.blank?
-          #callback(chunk)
-          #@parser << chunk
-          #binding.pry
-          Gnip::Powertrack.process(chunk)
+        # Process message chunk
+        #
+        def process_chunk(message)
+         Gnip::Powertrack.process(message)
         end
 
         def handle_error(http_connection)
